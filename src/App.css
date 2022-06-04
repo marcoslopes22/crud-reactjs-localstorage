@@ -1,0 +1,273 @@
+/*--------------------------------------GENERAL*/
+.App {
+  padding: 0px;
+  margin: 0px;
+  width: 1300px;
+}
+/*--------------------------------------USER-REGISTRED-HEADER*/
+.user-registred-header{
+  display: flex;
+  justify-content: center;
+  margin: 150px 1px 0px;
+  padding: 25px 0px 25px;
+  border: none;
+
+  background-color: rgb(80, 28, 201);
+  color: white;
+}
+.user-registred-header h3{
+  margin: 0px;
+  padding: 0px;
+}
+/*--------------------------------------NEW-USER-BUTTON*/
+.div-new-user-button{
+  display: block;
+  margin: 0px 0px 0px 0px;
+}
+.new-user-button{
+  display: flex;
+  justify-content: start;
+  border: 3px solid;
+  border-radius: 0px;
+  padding: 15px 20px 15px;
+  margin: 0px 1px;
+  font-size: 12px;
+
+  background-color: rgb(148, 104, 253);
+  border-color: rgb(148, 104, 253);
+  color: white;
+}
+.new-user-button:hover{
+  border: 3px solid;
+  background-color: white;
+  border-color: rgb(136, 92, 238);
+  color: rgb(136, 92, 238);
+}
+
+/*--------------------------------------NEPCA-FIELD*/
+.nepca-field{
+  display: flex;
+  align-items: center;
+}
+.nepca-field fieldset{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  margin: 0px 1px 0px;
+  padding: 10px 0px 10px;
+  border: none;
+  font-weight: bold;
+
+  background-color: rgb(112, 64, 224);
+  color: rgb(255, 255, 255);
+}
+/*--------------------------------------READER-DATAS*/
+.reader-datas{
+  margin: 0px 1px;
+  padding: 0px;
+  border: 3px solid;
+  border-radius: 0px;
+
+  background-color: white;
+  border-color: rgb(112, 64, 224);
+}
+/*--------------------------------------MAPED-LIST*/
+.maped-list{
+  margin: 20px 0px 20px;
+  padding: 0px;
+}
+/*--------------------------------------DATAS-ADDED-LIST*/
+.added-datas-list{
+  display: flex;
+  text-align:center;
+  align-items: center;
+  margin: 8px 0px 8px;
+}
+.added-datas-list fieldset{
+  display: flex;
+  justify-content: center;
+  margin: 0px;
+  padding: 0px;
+  font-size: 13px;
+  width: 100%;
+  border: none;
+
+  color: rgb(47, 19, 112);
+}
+/*--------------------------------------BUTTONS-ADDED-DATAS*/
+.added-datas-list button{
+  display: flex;
+  justify-content: center;
+
+  padding: 8px;
+  width: 70px;
+  margin: 0px 3px 0px;
+  font-size: 11px;
+  border-radius: 0px;
+}
+.edit-button{
+  border: 3px solid;
+
+  background-color: rgb(148, 104, 253);
+  border-color: rgb(148, 104, 253);
+  color: white;
+}
+.delete-button{
+  border: 3px solid;
+
+  background-color: rgb(8, 235, 186);
+  border-color: rgb(8, 235, 186);
+  color: rgb(255, 255, 255);
+}
+.edit-button:hover{
+  border: 3px solid;
+
+  background-color: white;
+  border-color: rgb(148, 104, 253);
+  color: rgb(148, 104, 253);
+}
+.delete-button:hover{
+  border: 3px solid;
+
+  background-color: white;
+  border-color: rgb(8, 235, 186);
+  color: rgb(8, 235, 186);
+}
+/*--------------------------------------EMPTY-LIST-SMS*/
+.notification{
+  text-align: center;
+  margin: 10px 0px 10px;
+  padding: 0px;
+  font-size: 14px;
+
+  background-color: white;
+  color: rgb(47, 19, 112);
+}
+
+/*--------------------------------------REGISTRATION-WINDOW*/
+/*--------------------------------------BODY*/
+.registration-window{
+  display: block;
+  border: 3px solid;
+  margin: 5px 2px 0px;
+  padding: 0px;
+
+  background-color: white;
+  border-color: rgb(112, 64, 224);
+}
+/*--------------------------------------UPDATE-WINDOW*/
+/*--------------------------------------BODY*/
+.update-window{
+  display: block;
+  border: 3px solid;
+  margin: 5px 1px 0px;
+  padding: 0px;
+
+  background-color: white;
+  border-color: rgb(112, 64, 224);
+}
+/*--------------------------------------HEADER*/
+.header{
+  text-align: start;
+  padding: 0px;
+  margin: 0px;
+
+  background-color: rgb(112, 64, 224);
+  color: white;
+}
+.header h4{
+  padding: 5px 0px 5px 0px;
+  margin: 0px 0px 10px 18px;
+  font-size: 15px;
+}
+/*--------------------------------------DATA-REQUIRED*/
+.data-required{
+  display: flex;
+  align-items: center;
+  padding: 0px 20px 0px;
+  margin: 0px;
+
+  color: rgb(148, 104, 253);
+}
+.data-required fieldset{
+  display: flex;
+  justify-content: start;
+  padding: 0px;
+  margin: 0px 0px 0px 6px;
+  border: none;
+  width: 100%;
+  font-size: 11px;
+}
+/*--------------------------------------INPUTS*/
+.div-inputs{
+  display: flex;
+  align-items: center;
+  padding: 0px 20px 0px;
+  margin: 0px;
+}
+.div-inputs input{
+  display: flex;
+  justify-content: center;
+  border-radius: 0px;
+  width: 100%;
+  margin: 0px 2px 0px 3px;
+  padding: 5px;
+  border: 1px solid;
+
+  border-color: rgb(148, 104, 253);
+  background-color: white;
+  color: rgb(47, 19, 112);
+}
+.div-inputs input:focus{
+  outline: 1px solid;
+  outline-color: rgb(102, 71, 177);
+  color: rgb(47, 19, 112);
+}
+.div-inputs input::placeholder{
+  font-family: 'Poppins';
+  color: rgb(203, 190, 233);
+}
+/*--------------------------------------SAVE-CANCEL-BUTTONS*/
+.save-cancel-buttons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  marginn: 10px 40px 6px 0px;
+  margin: 0px 3px 0px;
+  padding: 8px;
+}
+.save-cancel-buttons button{
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+  width: 70px;
+  margin: 0px 3px 0px;
+  font-size: 11px;
+  border-radius: 0px;
+}
+.save-button{
+  border: 3px solid;
+  background-color: rgb(148, 104, 253);
+  border-color: rgb(148, 104, 253);
+  color: white;
+}
+.cancel-button{
+  border: 3px solid;
+
+  background-color: white;
+  border-color: rgb(148, 104, 253);
+  color: rgb(148, 104, 253);
+}
+.save-button:hover{
+  border: 3px solid;
+  background-color: rgb(88, 47, 184);
+  border-color: rgb(88, 47, 184);
+  color: white;
+}
+.cancel-button:hover{
+  border: 3px solid;
+  background-color: white;
+  border-color: rgb(88, 47, 184);
+  color: rgb(148, 104, 253);
+}
