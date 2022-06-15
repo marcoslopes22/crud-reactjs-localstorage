@@ -4,9 +4,8 @@ import './App.css';
 function App() {
 
   //Adquirir o botão "New User", a janela de cadastro e atualização.
-  const newUserButton = document.querySelector(".div-new-user-button");
-  const registrationWindow = document.querySelector(".registration-window");
-  const updateWindow = document.querySelector(".update-window");
+  const registrationWindow = document.getElementById("registration-window");
+  const updateWindow = document.getElementById("update-window");
 
   //Lista de usuários cadastrados.
   const [dataClient, setDataClient] = useState([]);
@@ -74,7 +73,7 @@ function App() {
       emailClient === undefined || 
       phoneClient === undefined ||
       countryClient === undefined){
-      alert("por favor, preencha os campos corretamente");
+      alert("Por favor, preencha os campos corretamente!");
     } else {
 
       const clientModel = {
@@ -90,8 +89,6 @@ function App() {
   
       setDataClient([...dataClient, clientModel]);
       clearForm();
-
-      closeRegistrationWind();
     };
   };
 
@@ -113,17 +110,21 @@ function App() {
   upInputCountry.value = "";
   };
 
+  //Cancelar mudanças.
+  const cancelChanges = () =>{
+    clearForm();
+    closeUpdateWind();
+    openRegistrationWind();
+  };
+
   //Abrir janela de cadastro.
   const openRegistrationWind = ()=>{
-    newUserButton.style.display = 'none';
-    updateWindow.style.display = 'none';
-    registrationWindow.style.display = 'block';
+    registrationWindow.style.display = 'flex';
   };
 
   //Fechar janela de cadastro.
   const closeRegistrationWind = () => {
     registrationWindow.style.display = 'none';
-    newUserButton.style.display = 'block';
 
     setNameClient(undefined);
     setEmailClient(undefined);
@@ -136,11 +137,16 @@ function App() {
     inputCountry.value = "";
   };
 
+  //Abrir a janela de atualização
+  const openUpdateWindow = ()=>{
+    updateWindow.style.display = "flex";
+  };
+
   //Fechar janela de Atualização.
   const closeUpdateWind = () => {
-    updateWindow.style.display = 'none';
-    newUserButton.style.display = 'block';
+    updateWindow.style.display = "none";
   };
+
   //Deletar usuário cadastro.
   const deleteClient = (index) => {
     const getDB = getLocalStorage();
@@ -157,11 +163,12 @@ function App() {
     setLocalStorage(getDB);
 
     closeUpdateWind();
+    openRegistrationWind();
   };
 
   //Checar os dados e direcionar para função de atualização dos dados.
   const checkDatas = () => {
-      const saveButtonId  = document.getElementById("update-clicked").value;
+      const updateButton  = document.getElementById("update-button").value;
 
       if (nameClient === undefined ||
         emailClient === undefined ||
@@ -178,7 +185,7 @@ function App() {
           phone: phoneClient,
           country: countryClient
         };
-        updateClient(saveButtonId, clientModel);
+        updateClient(updateButton, clientModel);
         setDataClient(getLocalStorage);
         clearForm();
       };
@@ -188,15 +195,14 @@ function App() {
   const toDefineAction = (action) =>{
     const dataButton = action.target.dataset.action;
     const indexButton = action.target.id;
-    document.getElementById("update-clicked").value = indexButton;
+    document.getElementById("update-button").value = indexButton;
 
     if (dataButton === "update"){
-
-      registrationWindow.style.display = 'none';
-      newUserButton.style.display = 'none';
-      updateWindow.style.display = 'block';
-
+      
       const getDB = getLocalStorage()[indexButton];
+
+      closeRegistrationWind();
+      openUpdateWindow();
 
       upInputName.value = getDB.name;
       upInputEmail.value = getDB.email;
@@ -225,58 +231,28 @@ function App() {
       <div className="user-registred-header">
         <h3>REGISTERED USERS</h3>
       </div>
-
       <div className="nepca-field">
-        <fieldset className="name">
-          <label>NAME</label>
-          </fieldset>
-
-        <fieldset className="email">
-          <label>EMAIL</label>
-          </fieldset>
-
-        <fieldset className="phone">
-          <label>PHONE</label>
-          </fieldset>
-
-        <fieldset className="country">
-          <label>ADDRESS</label>
-          </fieldset>
-        <fieldset className="country">
-          <label>ACTIONS</label>
-          </fieldset>
+        <fieldset className="name"><label>NAME</label></fieldset>
+        <fieldset className="email"><label>EMAIL</label></fieldset>
+        <fieldset className="phone"><label>PHONE</label></fieldset>
+        <fieldset className="country"><label>ADDRESS</label></fieldset>
+        <fieldset className="country"><label>ACTIONS</label></fieldset>
       </div>
-      
       <fieldset className="reader-datas">
         {dataClient.length > 0 ? (
           <div className="maped-list">
             {dataClient.map((item,id) => (
             <div className="added-datas-list" key={id}>
-                
-              <fieldset className="name">
-                <label>{item.name}</label>
-              </fieldset>
-
-              <fieldset className="email">
-                <label>{item.email}</label>
-              </fieldset>
-
-              <fieldset className="phone">
-                <label>{item.phone}</label>
-              </fieldset>
-
-              <fieldset className="country">
-                <label>{item.country}</label>
-              </fieldset>
-
+              <fieldset className="name"><label>{item.name}</label></fieldset>
+              <fieldset className="email"><label>{item.email}</label></fieldset>
+              <fieldset className="phone"><label>{item.phone}</label></fieldset>
+              <fieldset className="country"><label>{item.country}</label></fieldset>
               <fieldset className="action-buttons">
-                <button onClick={toDefineAction} data-action="update" id={id} className="edit-button">EDIT</button>
-                <button onClick={toDefineAction} data-action="delete" id={id} className="delete-button">DELETE</button>
+                <button onClick={ toDefineAction } data-action="update" id={id} className="edit-button">EDIT</button>
+                <button onClick={ toDefineAction } data-action="delete" id={id} className="delete-button">DELETE</button>
               </fieldset>
-            </div>
-            ))}
-          </div>
-          ): (
+            </div>))}
+          </div>):(
           <div className="notification">
             <label>Ops! There are no registered users on this system...</label>
             <label>Click "New User" to registration.</label>
@@ -284,81 +260,30 @@ function App() {
           )}
       </fieldset>
 
-      <div className="div-new-user-button" style={{display: 'block'}}>
-        <button className="new-user-button" onClick={openRegistrationWind}>NEW USER</button>
-      </div>
+      <fieldset id="registration-window" className="registration-window" style={{ display: "flex" }}>
+        <fieldset><input id="name-input" onChange={ toAssignName } placeholder="Type user name"></input></fieldset>
+        <fieldset><input id="email-input" onChange={ (e) => setEmailClient(emailClient = e.target.value) } placeholder="Ex: exempleemail@exemple.com"></input></fieldset>
+        <fieldset><input id="phone-input" onChange={ formatPhoneNumber } placeholder="Ex: 99 99999-999"></input></fieldset>
+        <fieldset><input id="country-input" onChange={ toAssignCountry } placeholder="User address"></input></fieldset>
+        <fieldset className="action-buttons">
+        <button id="register-button" className="edit-button" onClick={ createClient }>REGISTER</button>
+        <button id="clear-button" className="clear-button" onClick={ clearForm }>CLEAR</button>
+        </fieldset>
+      </fieldset>
 
-      <fieldset className="registration-window" style={{display: 'none'}}>
-        <div className="header">
-          <h4>NEW USER REGISTRATION</h4>
-        </div>
-
-        <div className="data-required">
-        <fieldset className="name">
-          <label>First name*</label>
-          </fieldset>
-
-        <fieldset className="email">
-          <label>Email address*</label>
-          </fieldset>
-
-        <fieldset className="phone">
-          <label>Phone Number*</label>
-          </fieldset>
-
-        <fieldset className="country">
-          <label>Address*</label>
-          </fieldset>
-        </div>
-        
-        <div className="div-inputs">
-          <input id="name-input" onChange={toAssignName} placeholder="Type the first name"></input>
-          <input id="email-input" onChange={(email) => setEmailClient(email.target.value)} placeholder="Ex: example@email.com"></input>
-          <input id="phone-input" onChange={formatPhoneNumber} placeholder="Ex: 999 9999-9999"></input>
-          <input id="country-input" onChange={toAssignCountry} placeholder="Type user address"></input>
-        </div>
-
-        <div className="save-cancel-buttons">
-          <button onClick={createClient} className="save-button">SAVE</button>
-          <button onClick={closeRegistrationWind} className="cancel-button">CANCEL</button>
-        </div>
+      <fieldset id="update-window" className="registration-window" style={{ display: "none" }}>
+        <fieldset><input id="up-name-input" onChange={ toAssignName } placeholder="Type user name"></input></fieldset>
+        <fieldset><input id="up-email-input" onChange={ (e) => setEmailClient(emailClient = e.target.value) } placeholder="Ex: exempleemail@exemple.com"></input></fieldset>
+        <fieldset><input id="up-phone-input" onChange={ formatPhoneNumber } placeholder="Ex: 99 99999-999"></input></fieldset>
+        <fieldset><input id="up-country-input" onChange={ toAssignCountry } placeholder="User address"></input></fieldset>
+        <fieldset className="action-buttons">
+        <button id="update-button" className="edit-button" onClick={ checkDatas }>UPDATE</button>
+        <button id="cancel-button" className="clear-button" onClick={ cancelChanges }>CANCEL</button>
+        </fieldset>
       </fieldset>
       
-      <fieldset className="update-window" style={{display: 'none'}}>
-        <div className="header">
-          <h4>UPDATE USER DATAS</h4>
-        </div>
+      <p className="credits">Desenvolvido por Marcos Aurélio Lopes de Araújo</p>
 
-        <div className="data-required">
-        <fieldset className="name">
-          <label>First name*</label>
-          </fieldset>
-
-        <fieldset className="email">
-          <label>Email address*</label>
-          </fieldset>
-
-        <fieldset className="phone">
-          <label>Phone Number*</label>
-          </fieldset>
-
-        <fieldset className="country">
-          <label>Address*</label>
-          </fieldset>
-        </div>
-
-        <div className="div-inputs">
-          <input id="up-name-input" onChange={toAssignName} placeholder="Nome completo"></input>
-          <input id="up-email-input" onChange={(email) => setEmailClient(email.target.value)} placeholder="Ex: emailexemplo@dominio.com"></input>
-          <input id="up-phone-input" onChange={formatPhoneNumber} placeholder="Ex: DD9888888"></input>
-          <input id="up-country-input" onChange={toAssignCountry} placeholder="Digite o endereço do usuário"></input>
-        </div>
-
-        <div className="save-cancel-buttons">
-          <button id="update-clicked" onClick={checkDatas} className="save-button" >UPDATE</button>
-          <button onClick={closeUpdateWind} className="cancel-button">CANCEL</button>
-        </div>
-      </fieldset>
     </div>
   );
 };
